@@ -1,0 +1,36 @@
+name: Node CI
+
+on:
+  push:
+    branches: 
+      - master
+      - gh-pages-cd
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Yarn
+      uses: Borales/actions-yarn@v2.0.1
+      with:
+        cmd: install # will run `yarn install` command
+    - name: Yarn Install, Build, and Deploy
+      run: |
+        yarn install
+        yarn build
+    - name: GitHub Pages Deploy
+      uses: maxheld83/ghpages@v0.2.1
+      env:
+        BUILD_DIR: ./build
+        GH_PAT: ${{ secrets.GH_PAT }}
