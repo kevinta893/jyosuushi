@@ -34,7 +34,13 @@ git clone https://github.com/ahlec/jyosuushi.git
 yarn install
 ```
 
-3. Start the development server
+3. Create config.json using a copy of: config.json-template
+
+```
+cp .\config.json-template config.json
+```
+
+4. Start the development server
 
 ```
 yarn start
