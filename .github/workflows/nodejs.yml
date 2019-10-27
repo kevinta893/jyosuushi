@@ -21,16 +21,19 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install Yarn
+    - name: Yarn Install Packages
       uses: Borales/actions-yarn@v2.0.1
       with:
         cmd: install # will run `yarn install` command
-    - name: Yarn Install, Build, and Deploy
+    - name: Build Data
       run: |
         /bin/cp -rf ./.github/workflows/webdeploy-config.json ./config.json
         yarn db:update
         yarn build-data
-        yarn build
+    - name: Yarn Build
+      uses: Borales/actions-yarn@v2.0.1
+      with:
+        cmd: build # will run `yarn build` command
     - name: GitHub Pages Deploy
       uses: maxheld83/ghpages@v0.2.1
       env:
