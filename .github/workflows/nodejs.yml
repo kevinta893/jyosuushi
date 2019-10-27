@@ -27,6 +27,7 @@ jobs:
         cmd: install # will run `yarn install` command
     - name: Yarn Install, Build, and Deploy
       run: |
+        npm install
         /bin/cp -rf ./.github/workflows/webdeploy-config.json ./config.json
         yarn install
         yarn db:update
