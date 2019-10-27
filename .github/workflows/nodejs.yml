@@ -27,7 +27,10 @@ jobs:
         cmd: install # will run `yarn install` command
     - name: Yarn Install, Build, and Deploy
       run: |
+        /bin/cp -rf ./.github/workflows/webdeploy-config.json ./config.json
         yarn install
+        yarn db:update
+        yarn build-data
         yarn build
     - name: GitHub Pages Deploy
       uses: maxheld83/ghpages@v0.2.1
