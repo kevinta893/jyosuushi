@@ -28,10 +28,9 @@ jobs:
     - name: Yarn Install, Build, and Deploy
       run: |
         /bin/cp -rf ./.github/workflows/webdeploy-config.json ./config.json
-        yarn install
+        yarn install --prod=true
         yarn db:update
         yarn build-data
-        yarn install --force
         yarn build
     - name: GitHub Pages Deploy
       uses: maxheld83/ghpages@v0.2.1
